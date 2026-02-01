@@ -6,7 +6,7 @@ import com.spring_boot.uni_market.entity.User;
 import com.spring_boot.uni_market.entity.UserProfile;
 import com.spring_boot.uni_market.service.UserService;
 import com.spring_boot.uni_market.utils.StandardResponse;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/user")
 @CrossOrigin(origins = "*") // Allow for frontend dev
-@RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<StandardResponse> registerUser(@RequestBody UserRegisterDTO dto) {

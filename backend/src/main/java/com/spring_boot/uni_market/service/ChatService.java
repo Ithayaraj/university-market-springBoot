@@ -1,5 +1,6 @@
 package com.spring_boot.uni_market.service;
 
+import com.spring_boot.uni_market.dto.ConversationDTO;
 import com.spring_boot.uni_market.dto.MessageDTO;
 import com.spring_boot.uni_market.entity.Conversation;
 import com.spring_boot.uni_market.entity.Message;
@@ -12,6 +13,7 @@ import com.spring_boot.uni_market.repo.UserProfileRepo;
 import com.spring_boot.uni_market.repo.UserRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,15 +21,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class ChatService {
 
-    private final ConversationRepo conversationRepo;
-    private final MessageRepo messageRepo;
-    private final UserRepo userRepo;
-    private final ProductRepo productRepo;
-    private final UserProfileRepo userProfileRepo;
+    @Autowired
+    private ConversationRepo conversationRepo;
+    @Autowired
+    private MessageRepo messageRepo;
+    @Autowired
+    private UserRepo userRepo;
+    @Autowired
+    private ProductRepo productRepo;
+    @Autowired
+    private UserProfileRepo userProfileRepo;
 
     public String sendMessage(MessageDTO dto) {
         User sender = userRepo.findById(dto.getSenderId())
@@ -73,14 +79,14 @@ public class ChatService {
         }).collect(Collectors.toList());
     }
 
-    public List<com.spring_boot.uni_market.dto.ConversationDTO> getConversationsForUser(Long userId) {
+    public List<ConversationDTO> getConversationsForUser(Long userId) {
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         List<Conversation> conversations = conversationRepo.findByUser(user);
 
         return conversations.stream().map(c -> {
-            com.spring_boot.uni_market.dto.ConversationDTO dto = new com.spring_boot.uni_market.dto.ConversationDTO();
+            ConversationDTO dto = new ConversationDTO();
             dto.setConversationId(c.getConversationId());
 
             User otherUser = c.getBuyer().getUserId().equals(userId) ? c.getSeller() : c.getBuyer();

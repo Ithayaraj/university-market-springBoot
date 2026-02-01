@@ -4,15 +4,16 @@ import com.spring_boot.uni_market.dto.CategoryDTO;
 import com.spring_boot.uni_market.entity.Category;
 import com.spring_boot.uni_market.repo.CategoryRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class CategoryService {
 
-    private final CategoryRepo categoryRepo;
+    @Autowired
+    private CategoryRepo categoryRepo;
 
     public String createCategory(CategoryDTO dto) {
         if (categoryRepo.existsByName(dto.getName())) {

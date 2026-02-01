@@ -9,17 +9,19 @@ import com.spring_boot.uni_market.repo.UserProfileRepo;
 import com.spring_boot.uni_market.repo.UserRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class UserService {
 
-    private final UserRepo userRepo;
-    private final UserProfileRepo userProfileRepo;
+    @Autowired
+    private UserRepo userRepo;
+    @Autowired
+    private UserProfileRepo userProfileRepo;
 
     public String registerUser(UserRegisterDTO dto) {
         if (userRepo.existsByEmail(dto.getEmail())) {

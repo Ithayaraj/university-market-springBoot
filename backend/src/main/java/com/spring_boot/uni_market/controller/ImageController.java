@@ -2,7 +2,7 @@ package com.spring_boot.uni_market.controller;
 
 import com.spring_boot.uni_market.service.ImageService;
 import com.spring_boot.uni_market.utils.StandardResponse;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping("/api/v1/image")
 @CrossOrigin(origins = "*")
-@RequiredArgsConstructor
 public class ImageController {
 
-    private final ImageService imageService;
+    @Autowired
+    private ImageService imageService;
 
     @PostMapping("/upload")
     public ResponseEntity<StandardResponse> uploadFile(@RequestParam("file") MultipartFile file) {

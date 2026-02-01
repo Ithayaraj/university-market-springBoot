@@ -13,21 +13,26 @@ import com.spring_boot.uni_market.repo.UserProfileRepo;
 import com.spring_boot.uni_market.repo.UserRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class ProductService {
 
-    private final ProductRepo productRepo;
-    private final UserRepo userRepo;
-    private final CategoryRepo categoryRepo;
-    private final ProductImageRepo productImageRepo;
-    private final UserProfileRepo userProfileRepo;
+    @Autowired
+    private ProductRepo productRepo;
+    @Autowired
+    private UserRepo userRepo;
+    @Autowired
+    private CategoryRepo categoryRepo;
+    @Autowired
+    private ProductImageRepo productImageRepo;
+    @Autowired
+    private UserProfileRepo userProfileRepo;
 
     public String addProduct(ProductDTO dto) {
         System.out.println("Adding Product: " + dto);

@@ -4,7 +4,7 @@ import com.spring_boot.uni_market.dto.CategoryDTO;
 import com.spring_boot.uni_market.entity.Category;
 import com.spring_boot.uni_market.service.CategoryService;
 import com.spring_boot.uni_market.utils.StandardResponse;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/category")
 @CrossOrigin(origins = "*")
-@RequiredArgsConstructor
 public class CategoryController {
-
-    private final CategoryService categoryService;
+    @Autowired
+    private CategoryService categoryService;
 
     @PostMapping("/create")
     public ResponseEntity<StandardResponse> createCategory(@RequestBody CategoryDTO dto) {

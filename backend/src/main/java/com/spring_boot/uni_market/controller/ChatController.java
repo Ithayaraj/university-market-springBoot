@@ -3,7 +3,7 @@ package com.spring_boot.uni_market.controller;
 import com.spring_boot.uni_market.dto.MessageDTO;
 import com.spring_boot.uni_market.service.ChatService;
 import com.spring_boot.uni_market.utils.StandardResponse;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/chat")
 @CrossOrigin(origins = "*")
-@RequiredArgsConstructor
 public class ChatController {
 
-    private final ChatService chatService;
+    @Autowired
+    private ChatService chatService;
 
     @PostMapping("/send")
     public ResponseEntity<StandardResponse> sendMessage(@RequestBody MessageDTO dto) {

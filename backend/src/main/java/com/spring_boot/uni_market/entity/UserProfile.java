@@ -1,6 +1,5 @@
 package com.spring_boot.uni_market.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class UserProfile {
 
     @Id
-    @JsonProperty("userId")
     @Column(name = "user_id")
     private Long userId;
 
@@ -23,24 +21,21 @@ public class UserProfile {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @JsonProperty("fullName")
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @JsonProperty("phone")
+    @Column(name="phone")
     private String phone;
 
-    @JsonProperty("universityId")
     @Column(name = "university_id", unique = true)
     private String universityId;
 
-    @JsonProperty("department")
+    @Column(name = "department")
     private String department;
 
-    @JsonProperty("batch")
+    @Column(name = "batch")
     private String batch;
 
-    @JsonProperty("avatarUrl")
     @Column(name = "avatar_url", length = 1000)
     private String avatarUrl;
 }
